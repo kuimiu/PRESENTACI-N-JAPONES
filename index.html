@@ -9,28 +9,39 @@
     
     <style>
         /* --- ESTILOS PARA LAS OLAS ANIMADAS --- */
-        .waves-container {
-            position: absolute; /* Cambiado a absolute para que se mueva con la slide */
-            bottom: 0; /* PEGADO AL FONDO */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200vw; 
-            height: 100vh; 
-            max-height: 200px; 
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
+       /* Por defecto, las olas solo se ven cuando la diapositiva está activa */
+.waves-container {
+    position: absolute;
+    bottom: 0 !important;
+    /* TRUCO PARA BORDE A BORDE REAL: */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw; 
+    /* ------------------------------ */
+    height: 25vh; 
+    min-height: 160px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
 
-        /* Capas de olas corregidas */
-        .wave {
-            position: absolute;
-            bottom: 0;
-            width: 200%;
-            height: 100%;
-            background-repeat: repeat-x;
-            transform-origin: center bottom;
-        }
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%; /* El doble de ancho para que la animación no deje huecos */
+    height: 100%;
+}
+
+.wave svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.present .waves-container {
+    display: block;
+}
 
         .wave1 { animation: move_wave 5s linear infinite; opacity: 0.7; z-index: 1000; }
         .wave2 { animation: move_wave 10s linear infinite; opacity: 0.4; z-index: 999; bottom: 5px; }
@@ -41,6 +52,16 @@
             100% { transform: translateX(-50%); }
         }
 
+        .reveal-viewport {
+    height: 100% !important;
+}
+
+/* Ajuste específico para pantallas muy altas (como tu Razr 50) */
+@media screen and (min-aspect-ratio: 1/2) {
+    .reveal h1 {
+        margin-top: 10vh !important; /* Baja el título un poco más si la pantalla es muy alta */
+    }
+}
         /* --- MÁRGENES Y RESPONSIVIDAD --- */
         .reveal .slides section {
             /* Añade margen a los lados para que no toque el borde del cel */
@@ -110,33 +131,33 @@
         <div class="slides">
 
             <!-- Diapositiva 1 -->
-            <section style="height: 97vh; display: flex !important; flex-direction: column; justify-content: space-between; align-items: center; position: relative; padding-top: 5vh;">
+            <section style="height: 100vh; position: relative; padding: 0 !important; margin: 0 !important;">
     
-    <!-- Título con margen flexible en % -->
-     <!-- 1. BLOQUE ESPACIADOR: Cambia este 15vh para bajar o subir el título -->
-    <div style="height: 30vh; width: 100%;"></div>
-    <h1 style="margin: 0; font-size: 2.5em; line-height: 1.1; z-index: 2; width: 100%;">
+    <!-- Espaciador para bajar el título -->
+    <div style="height: 30vh;"></div>
+
+    <h1 style="font-size: 2.2em; z-index: 10; position: relative; text-align: center;">
         私ののとじま水族館でのたいけん🐟
     </h1>
 
-    <!-- Contenedor de olas -->
     <div class="waves-container">
+        <!-- Tus olas aquí (wave1, wave2, wave3) -->
         <div class="wave wave1">
-            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                 <path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,100 L0,100 Z" fill="#0f59f8"></path>
             </svg>
         </div>
-        <div class="wave wave2">
-            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+        <!-- ... wave2 y wave3 ... -->
+         <div class="wave wave2">
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                 <path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,100 L0,100 Z" fill="#0f59f8"></path>
             </svg>
         </div>
         <div class="wave wave3">
-            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                 <path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,100 L0,100 Z" fill="#0f59f8"></path>
             </svg>
         </div>
-        <!-- (Repite wave2 y wave3 aquí dentro si las usas) -->
     </div>
 </section>
             <!-- Diapositivas de contenido -->
